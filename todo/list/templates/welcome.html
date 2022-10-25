@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        .table {
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <form action="{% url "logout" %}">
+        <button type="submit">LOGOUT</button>
+    </form>
+    <p style="text-align:center;font-size:30px;"><strong><u>Welcome {{Name}}</u></strong></p>
+    <form action="{% url 'list' %}" style="margin-left:600px;">
+        <button type="submit">+</button>
+    </form>
+    <p style="font-size:25px;margin-left:240px;"><u><strong>Your List</strong></u></p>
+    <p>
+    <table class="table">
+        <thead class="table">
+          <tr class="table">
+            <th scope="col" class="table">ID</th>
+            <th scope="col" class="table">Title</th>
+            <th scope="col" class="table">Note</th>
+            <th scope="col" class="table">Last Date</th>
+            <th scope="col" class="table">Count</th>
+            <th scope="col" class="table">Status</th>
+            <th scope="col" class="table">Update</th>
+            <th scope="col" class="table">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+            {%for i in obj%}
+                <tr>
+                    <td class="table">{{i.id}}</td>
+                    <td class="table">{{i.Title}}</td>
+                    <td class="table">{{i.Note}}</td>
+                    <td class="table">{{i.Last_Date}}</td>
+                    <td class="table">{{i.Count}}</td>
+                    <td class="table">{{i.Status}}</td>
+                    <td>
+                        <form action="{% url "update" i.id %}" class="d-inline">
+                            <button class="table">EDIT</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{% url "delete" i.id %}" method="POST" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="table">DELETE</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table></p>
+</body>
+</html>

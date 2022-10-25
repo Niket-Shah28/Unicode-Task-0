@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+</head>
+<body>
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    <p style="text-align:center;font-size:30px;"><u>LOGIN</u></p>
+    <div style="display:inline-block;margin-left:410px;">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{signin}}
+            <p><button type="submit" class="d-inline">LOG IN</button></form></p>
+        <form action="{% url "register" %}" method="GET">
+            <button type="submit" class="d-inline">REGISTER</button>
+        </form>
+    </div>
+</body>
+</html>
